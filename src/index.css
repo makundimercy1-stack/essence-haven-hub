@@ -149,12 +149,13 @@ All colors MUST be HSL.
 @layer components {
   /* Product Card Hover Effect */
   .product-card {
-    @apply group relative overflow-hidden rounded-2xl bg-card shadow-card transition-all duration-500 hover:shadow-luxury hover:-translate-y-2;
+    @apply relative overflow-hidden rounded-2xl bg-card transition-all duration-500;
+    box-shadow: var(--shadow-card);
   }
 
-  .product-card::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-card opacity-0 transition-opacity duration-500 group-hover:opacity-100;
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-luxury);
   }
 
   /* Luxury Button Styles */
