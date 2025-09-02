@@ -8,35 +8,64 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Luxury Perfume Design System */
+    --background: 0 0% 99%;
+    --foreground: 220 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary: Rose Gold / Champagne */
+    --primary: 30 25% 25%;
+    --primary-foreground: 30 15% 95%;
+    --primary-glow: 35 45% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary: Soft Cream */
+    --secondary: 40 15% 96%;
+    --secondary-foreground: 220 15% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted: Elegant Gray */
+    --muted: 220 10% 95%;
+    --muted-foreground: 220 8% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent: Deep Black */
+    --accent: 220 15% 8%;
+    --accent-foreground: 40 15% 96%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220 10% 90%;
+    --input: 220 10% 95%;
+    --ring: 30 25% 25%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Luxury Color Palette */
+    --luxury-gold: 45 70% 60%;
+    --luxury-rose-gold: 15 50% 70%;
+    --luxury-champagne: 40 30% 85%;
+    --luxury-pearl: 200 15% 96%;
+    --luxury-charcoal: 220 15% 15%;
+    --luxury-midnight: 220 25% 8%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--luxury-champagne)), hsl(var(--luxury-pearl)));
+    --gradient-gold: linear-gradient(135deg, hsl(var(--luxury-gold)), hsl(var(--luxury-rose-gold)));
+    --gradient-luxury: linear-gradient(135deg, hsl(var(--luxury-midnight)), hsl(var(--luxury-charcoal)));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(var(--luxury-pearl)));
+
+    /* Shadows */
+    --shadow-luxury: 0 10px 40px -10px hsl(var(--luxury-charcoal) / 0.15);
+    --shadow-card: 0 4px 20px -2px hsl(var(--luxury-charcoal) / 0.08);
+    --shadow-glow: 0 0 30px hsl(var(--luxury-rose-gold) / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +129,85 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-light;
+  }
+
+  /* Typography */
+  .heading-hero {
+    @apply text-5xl md:text-7xl font-light tracking-wide text-accent;
+  }
+
+  .heading-luxury {
+    @apply text-3xl md:text-4xl font-light tracking-wide text-accent;
+  }
+
+  .text-luxury {
+    @apply text-lg font-light leading-relaxed text-muted-foreground;
+  }
+}
+
+@layer components {
+  /* Product Card Hover Effect */
+  .product-card {
+    @apply group relative overflow-hidden rounded-2xl bg-card shadow-card transition-all duration-500 hover:shadow-luxury hover:-translate-y-2;
+  }
+
+  .product-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-card opacity-0 transition-opacity duration-500 group-hover:opacity-100;
+  }
+
+  /* Luxury Button Styles */
+  .btn-luxury {
+    @apply relative px-8 py-4 text-sm font-medium tracking-wide uppercase transition-all duration-300 rounded-full;
+    background: var(--gradient-luxury);
+    color: hsl(var(--accent-foreground));
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn-luxury:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .btn-gold {
+    @apply relative px-8 py-4 text-sm font-medium tracking-wide uppercase transition-all duration-300 rounded-full;
+    background: var(--gradient-gold);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-card);
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Hero Background */
+  .hero-bg {
+    background: var(--gradient-hero);
+  }
+
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Luxury Animations */
+  .fade-in-up {
+    @apply animate-fade-in;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  /* Newsletter Input */
+  .luxury-input {
+    @apply w-full px-6 py-4 bg-card border border-border rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300;
   }
 }
