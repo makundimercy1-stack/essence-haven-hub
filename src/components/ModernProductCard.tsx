@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Heart, Eye, Star, ShoppingBag, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -25,11 +26,12 @@ const ModernProductCard = ({ product }: ModernProductCardProps) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   return (
-    <div
-      className="product-card group p-6 h-full flex flex-col"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <Link to={`/product/${product.id}`} className="block">
+      <div
+        className="product-card group p-6 h-full flex flex-col cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
       {/* Product Image */}
       <div className="relative mb-6 overflow-hidden rounded-2xl">
         <img
@@ -64,7 +66,10 @@ const ModernProductCard = ({ product }: ModernProductCardProps) => {
             className={`glass-card w-10 h-10 rounded-full transition-all duration-300 ${
               isWishlisted ? 'text-luxury-rose-gold' : 'text-white hover:text-luxury-rose-gold'
             } ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}
-            onClick={() => setIsWishlisted(!isWishlisted)}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsWishlisted(!isWishlisted);
+            }}
           >
             <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-current' : ''}`} />
           </Button>
@@ -76,6 +81,7 @@ const ModernProductCard = ({ product }: ModernProductCardProps) => {
               isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
             }`}
             style={{ transitionDelay: '0.1s' }}
+            onClick={(e) => e.preventDefault()}
           >
             <Eye className="h-4 w-4" />
           </Button>
@@ -85,7 +91,10 @@ const ModernProductCard = ({ product }: ModernProductCardProps) => {
         <div className={`absolute bottom-4 left-4 right-4 transition-all duration-500 ${
           isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}>
-          <Button className="btn-gold w-full text-sm py-3 shimmer">
+          <Button 
+            className="btn-gold w-full text-sm py-3 shimmer"
+            onClick={(e) => e.preventDefault()}
+          >
             <ShoppingBag className="h-4 w-4 mr-2" />
             Quick Add
           </Button>
@@ -161,12 +170,13 @@ const ModernProductCard = ({ product }: ModernProductCardProps) => {
             variant="ghost"
             size="icon"
             className="magnetic-btn text-luxury-charcoal hover:text-luxury-rose-gold hover:bg-luxury-rose-gold/10 rounded-full transition-all duration-300"
+            onClick={(e) => e.preventDefault()}
           >
             <ShoppingBag className="h-5 w-5" />
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
