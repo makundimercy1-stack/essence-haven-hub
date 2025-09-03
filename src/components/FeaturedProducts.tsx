@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import ModernProductCard from "./ModernProductCard";
 
 const FeaturedProducts = () => {
   const featuredProducts = [
@@ -83,13 +83,19 @@ const FeaturedProducts = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {featuredProducts.map((product, index) => (
+            <div
+              key={product.id}
+              className="animate-slide-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <ModernProductCard product={product} />
+            </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <button className="btn-luxury">
+        <div className="text-center mt-16 animate-bounce-in" style={{ animationDelay: '0.8s' }}>
+          <button className="btn-luxury shimmer">
             View All Products
           </button>
         </div>

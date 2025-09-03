@@ -147,68 +147,220 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Product Card Hover Effect */
+  /* Modern Product Card with Glassmorphism */
   .product-card {
-    @apply relative overflow-hidden rounded-2xl bg-card transition-all duration-500;
-    box-shadow: var(--shadow-card);
+    @apply relative overflow-hidden rounded-3xl transition-all duration-700;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8), hsl(var(--luxury-pearl) / 0.6));
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: 
+      0 8px 32px hsl(var(--luxury-charcoal) / 0.1),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.2);
   }
 
   .product-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-luxury);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+      0 20px 60px hsl(var(--luxury-charcoal) / 0.15),
+      0 0 40px hsl(var(--luxury-rose-gold) / 0.2),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.3);
   }
 
-  /* Luxury Button Styles */
+  /* Modern Luxury Buttons with Glass Effect */
   .btn-luxury {
-    @apply relative px-8 py-4 text-sm font-medium tracking-wide uppercase transition-all duration-300 rounded-full;
-    background: var(--gradient-luxury);
+    @apply relative px-8 py-4 text-sm font-medium tracking-wide uppercase transition-all duration-500 rounded-full overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--luxury-midnight) / 0.9), hsl(var(--luxury-charcoal) / 0.8));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--luxury-charcoal) / 0.3);
     color: hsl(var(--accent-foreground));
-    box-shadow: var(--shadow-card);
+    box-shadow: 
+      0 8px 25px hsl(var(--luxury-charcoal) / 0.2),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.1);
   }
 
   .btn-luxury:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-luxury);
+    transform: translateY(-3px);
+    box-shadow: 
+      0 15px 40px hsl(var(--luxury-charcoal) / 0.3),
+      0 0 30px hsl(var(--luxury-rose-gold) / 0.4),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.2);
+  }
+
+  .btn-luxury::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, hsl(var(--luxury-rose-gold) / 0.2), transparent);
+  }
+
+  .btn-luxury:hover::before {
+    opacity: 1;
   }
 
   .btn-gold {
-    @apply relative px-8 py-4 text-sm font-medium tracking-wide uppercase transition-all duration-300 rounded-full;
-    background: var(--gradient-gold);
-    color: hsl(var(--primary-foreground));
-    box-shadow: var(--shadow-card);
+    @apply relative px-8 py-4 text-sm font-medium tracking-wide uppercase transition-all duration-500 rounded-full overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--luxury-gold) / 0.9), hsl(var(--luxury-rose-gold) / 0.8));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--luxury-gold) / 0.3);
+    color: hsl(var(--luxury-midnight));
+    box-shadow: 
+      0 8px 25px hsl(var(--luxury-gold) / 0.3),
+      inset 0 1px 0 hsl(var(--luxury-champagne) / 0.5);
   }
 
   .btn-gold:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow);
+    transform: translateY(-3px);
+    box-shadow: 
+      0 15px 40px hsl(var(--luxury-gold) / 0.4),
+      0 0 40px hsl(var(--luxury-gold) / 0.6),
+      inset 0 1px 0 hsl(var(--luxury-champagne) / 0.8);
   }
 
-  /* Hero Background */
+  .btn-gold::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(135deg, hsl(var(--luxury-champagne) / 0.3), transparent);
+  }
+
+  .btn-gold:hover::before {
+    opacity: 1;
+  }
+
+  /* Modern Hero Background with Parallax Effect */
   .hero-bg {
     background: var(--gradient-hero);
   }
 
-  /* Floating Animation */
+  .parallax-bg {
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Enhanced Floating Animation */
   .float {
-    animation: float 6s ease-in-out infinite;
+    animation: modernFloat 8s ease-in-out infinite;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+  @keyframes modernFloat {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg);
+      filter: brightness(1);
+    }
+    33% { 
+      transform: translateY(-15px) rotate(1deg);
+      filter: brightness(1.1);
+    }
+    66% { 
+      transform: translateY(-8px) rotate(-0.5deg);
+      filter: brightness(0.95);
+    }
   }
 
-  /* Luxury Animations */
-  .fade-in-up {
-    @apply animate-fade-in;
+  /* Modern Glassmorphism Card */
+  .glass-card {
+    @apply relative overflow-hidden rounded-3xl transition-all duration-700;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.7), hsl(var(--luxury-pearl) / 0.3));
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.2);
+    box-shadow: 
+      0 12px 40px hsl(var(--luxury-charcoal) / 0.1),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.3);
   }
 
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
+  .glass-card:hover {
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8), hsl(var(--luxury-pearl) / 0.4));
+    border-color: hsl(var(--luxury-rose-gold) / 0.3);
+    box-shadow: 
+      0 20px 60px hsl(var(--luxury-charcoal) / 0.15),
+      0 0 40px hsl(var(--luxury-rose-gold) / 0.1),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.4);
   }
 
-  /* Newsletter Input */
+  /* Luxury Shimmer Effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--luxury-rose-gold) / 0.2),
+      transparent
+    );
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  /* Modern Search Bar */
   .luxury-input {
-    @apply w-full px-6 py-4 bg-card border border-border rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300;
+    @apply w-full px-6 py-4 rounded-full text-foreground placeholder:text-muted-foreground focus:outline-none transition-all duration-500;
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8), hsl(var(--luxury-pearl) / 0.6));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: 
+      0 8px 25px hsl(var(--luxury-charcoal) / 0.1),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.2);
+  }
+
+  .luxury-input:focus {
+    border-color: hsl(var(--luxury-rose-gold) / 0.5);
+    box-shadow: 
+      0 12px 40px hsl(var(--luxury-charcoal) / 0.15),
+      0 0 30px hsl(var(--luxury-rose-gold) / 0.2),
+      inset 0 1px 0 hsl(var(--luxury-pearl) / 0.3);
+  }
+
+  /* Scroll Reveal Animation */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Modern Navigation Hover */
+  .nav-item {
+    @apply relative transition-all duration-300;
+  }
+
+  .nav-item::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 transition-all duration-300;
+    background: linear-gradient(90deg, hsl(var(--luxury-rose-gold)), hsl(var(--luxury-gold)));
+  }
+
+  .nav-item:hover::after {
+    width: 100%;
+  }
+
+  /* Magnetic Button Effect */
+  .magnetic-btn {
+    transition: transform 0.2s ease-out;
+  }
+
+  /* Luxury Badge */
+  .luxury-badge {
+    @apply absolute top-3 left-3 px-3 py-1 text-xs font-medium uppercase tracking-wider rounded-full;
+    background: linear-gradient(135deg, hsl(var(--luxury-rose-gold) / 0.9), hsl(var(--luxury-gold) / 0.9));
+    color: hsl(var(--luxury-midnight));
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--luxury-rose-gold) / 0.3);
+    box-shadow: 0 4px 15px hsl(var(--luxury-rose-gold) / 0.2);
   }
 }
